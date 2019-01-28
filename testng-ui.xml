@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="LinkedIn-UI">
+    <test name="Full Scope">
+        <classes>
+            <class name="com.epam.linkedin.ui.CompanyPageTest"/>
+            <class name="com.epam.linkedin.ui.EditingAnAccountTest"/>
+            <class name="com.epam.linkedin.ui.JobsTest"/>
+            <class name="com.epam.linkedin.ui.LoginTest"/>
+            <class name="com.epam.linkedin.ui.MessagingTest"/>
+            <class name="com.epam.linkedin.ui.RegistrationTest"/>
+        </classes>
+    </test>
+</suite>
