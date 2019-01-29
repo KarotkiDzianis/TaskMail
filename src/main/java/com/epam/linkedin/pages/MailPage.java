@@ -11,13 +11,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Log4j2
 public class MailPage extends BasePage {
 
-    @FindBy(xpath = "//*[@class='CL W']")
+    @FindBy(xpath = "//*[contains(text(), 'Создать ярлык')]")
     private WebElement buttonCreateLabel;
 
-    @FindBy(xpath = "//*[@id=':ec.na']")
+    @FindBy(xpath = "//input[@class='xx']")
     private WebElement fieldForNameLabel;
 
-    @FindBy(xpath = "//*[@id=':9a']/span[2]/div")
+    @FindBy(xpath = "//*[@role='button' and @id=':9l']")
     private WebElement linkYet;
 
     @FindBy(xpath = "//button[@name='ok']")
@@ -32,25 +32,21 @@ public class MailPage extends BasePage {
      */
     public void createNewLabel(String name) {
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=':9a']/span[2]/div")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@role='button' and @id=':9l']")));
         linkYet.click();
         log.info("Link Yet click");
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='CL Wj']")));
         buttonCreateLabel.click();
+        log.info("Link Create click");
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class='xx']")));
         fieldForNameLabel.clear();
         fieldForNameLabel.sendKeys(name);
         log.info("Label name entered: " + name);
         buttonCreate.click();
     }
 
-    public void createNewLabelJS(String name) {
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-        WebElement el = (WebElement) javascriptExecutor.executeScript("document.getElementByXpath('//*[@class='CJ']')");
-        el.click();
-        buttonCreateLabel.click();
-        fieldForNameLabel.clear();
-        fieldForNameLabel.sendKeys(name);
-        buttonCreate.click();
-    }
 
     /**
      * method delete  Label by Name

@@ -10,7 +10,7 @@ public class LoginSteps {
     private EnterPasswordPage enterPasswordPage;
     private MailPage mailPage;
 
-    public void login(String email, String password) throws InterruptedException {
+    public void login(String email, String password)  {
         startPage = new StartPage();
         startPage.fieldEmailSendKeys(email);
         enterPasswordPage = new EnterPasswordPage();
@@ -18,6 +18,7 @@ public class LoginSteps {
     }
 
     public void createNewLabel(String name) {
+        mailPage = new MailPage();
         mailPage.createNewLabel(name);
     }
 

@@ -24,7 +24,7 @@ public class EnterPasswordPage extends BasePage {
     /**
      * method fill the field Password and click Button 'Next'
      */
-    public MailPage fieldPasswordSendKeys(String pass) throws InterruptedException {
+    public MailPage fieldPasswordSendKeys(String pass) {
         log.info("From PassPage");
         fieldPassword.sendKeys(pass);
         log.info("Enter password: " + pass);

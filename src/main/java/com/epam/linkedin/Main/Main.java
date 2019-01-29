@@ -14,15 +14,14 @@ public class Main {
     protected final static String NAME_LABEL = "TOP5";
 
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         log.debug("Create driver");
         DriverManager.getDriver().get(BASE_URL);
         log.info("Open URL: " + BASE_URL);
         LoginSteps loginSteps = new LoginSteps();
         loginSteps.login(EMAIL, PASSWORD);
         loginSteps.createNewLabel(NAME_LABEL);
-
-        /*DriverManager.closeDriver();
-        log.debug("Close driver");*/
+        DriverManager.closeDriver();
+        log.debug("Close driver");
     }
 }
