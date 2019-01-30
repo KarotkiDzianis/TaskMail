@@ -11,7 +11,7 @@ public class Main {
     protected final static String EMAIL = "linked.test11@gmail.com";
     protected final static String PASSWORD = "Begemot11";
     private final static String BASE_URL = "http://gmail.com/";
-    protected final static String NAME_LABEL = "TOP5";
+    public final static String NAME_LABEL = "TOP5";
 
 
     public static void main(String[] args) {
@@ -21,6 +21,8 @@ public class Main {
         LoginSteps loginSteps = new LoginSteps();
         loginSteps.login(EMAIL, PASSWORD);
         loginSteps.createNewLabel(NAME_LABEL);
+        loginSteps.workWithMails();
+        loginSteps.deleteFolder();
         DriverManager.closeDriver();
         log.debug("Close driver");
     }
