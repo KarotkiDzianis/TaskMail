@@ -20,8 +20,9 @@ public class LoginSteps {
     }
 
     public void workWithMails(){
-        mailPage.makeListName();
+       mailPage.filterMapsbyValue(mailPage.makeListName());
     }
+
     public  void deleteFolder(){
         mailPage.deleteLabel();
     }

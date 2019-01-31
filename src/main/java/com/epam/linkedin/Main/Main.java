@@ -20,7 +20,7 @@ public class Main {
         log.info("Open URL: " + BASE_URL);
         LoginSteps loginSteps = new LoginSteps();
         loginSteps.login(EMAIL, PASSWORD);
-        loginSteps.createNewLabel(NAME_LABEL);
+        /*loginSteps.createNewLabel(NAME_LABEL);*/
         loginSteps.workWithMails();
         loginSteps.deleteFolder();
         DriverManager.closeDriver();
