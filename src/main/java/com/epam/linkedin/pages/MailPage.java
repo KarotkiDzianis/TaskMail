@@ -11,8 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Log4j2
 public class MailPage extends BasePage {
@@ -101,12 +99,16 @@ public class MailPage extends BasePage {
         return namesMes;
     }
 
-    public void filterMapsbyValue(Map map) {
-        TreeMap<Integer, Double> sortedMap = new TreeMap<>();
-        for (Map.Entry<Integer, Double> entry : map.entrySet()) {
-            sortedMap.put((Integer) entry.getKey(), (Double)entry.getValue());
+    public Map filterMapsbyValue(int i, Map map) {
+        map.entrySet().stream()
+                .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed());
+        for(int j=0; j<i; j++) {
+            for (Object e : map.entrySet()) {
+                int key = (Integer) e;
+                System.out.println(key);
+            }
         }
-
+        return map;
     }
 
     /**

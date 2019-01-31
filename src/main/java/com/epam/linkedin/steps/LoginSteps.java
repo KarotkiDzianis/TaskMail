@@ -4,6 +4,8 @@ import com.epam.linkedin.pages.EnterPasswordPage;
 import com.epam.linkedin.pages.MailPage;
 import com.epam.linkedin.pages.StartPage;
 
+import java.util.Map;
+
 public class LoginSteps {
 
     private StartPage startPage = new StartPage();
@@ -19,9 +21,12 @@ public class LoginSteps {
         mailPage.createNewLabel(name);
     }
 
-    public void workWithMails(){
-       mailPage.filterMapsbyValue(mailPage.makeListName());
+    public void workWithMails(int i){
+     Map map = mailPage.makeListName();
+     mailPage.filterMapsbyValue(i, map);
     }
+
+
 
     public  void deleteFolder(){
         mailPage.deleteLabel();
