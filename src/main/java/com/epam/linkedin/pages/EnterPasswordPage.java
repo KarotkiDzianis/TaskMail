@@ -14,8 +14,8 @@ public class EnterPasswordPage extends BasePage {
     @FindBy(xpath = "//*[@id='password']/div[1]/div/div[1]/input")
     private WebElement fieldPassword;
 
-    @FindBy(xpath = "//*[@role='button' and @id='passwordNext']")
-    private WebElement button;
+    @FindBy(xpath = "//*[@role='button' and @id='passwordNext']")      //*[@role='button' and @id='passwordNext']
+    private WebElement buttonNext;
 
     public EnterPasswordPage() {
         super();
@@ -28,9 +28,14 @@ public class EnterPasswordPage extends BasePage {
         log.info("From PassPage");
         fieldPassword.sendKeys(pass);
         log.info("Enter password: " + pass);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@role='button' and @id='passwordNext']")));
-        button.click();
+        buttonNext.click();
         log.info("Button Next is click ");
         return new MailPage();
     }

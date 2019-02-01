@@ -21,10 +21,10 @@ public class Main {
         log.info("Open URL: " + BASE_URL);
         LoginSteps loginSteps = new LoginSteps();
         loginSteps.login(EMAIL, PASSWORD);
-        /*loginSteps.createNewLabel(NAME_LABEL);*/
         loginSteps.workWithMails(NUMBER_MESSEGA_FOR_TRANSFER);
-        loginSteps.deleteFolder();
-        DriverManager.closeDriver();
+        loginSteps.createNewLabel(NAME_LABEL);
+        /*loginSteps.deleteFolder();*/
+        /*DriverManager.closeDriver();*/
         log.debug("Close driver");
     }
 }
