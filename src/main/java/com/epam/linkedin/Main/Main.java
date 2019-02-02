@@ -12,7 +12,7 @@ public class Main {
     protected final static String PASSWORD = "Begemot11";
     private final static String BASE_URL = "http://gmail.com/";
     public final static String NAME_LABEL = "TOP5";
-    public final static Integer NUMBER_MESSEGA_FOR_TRANSFER = 1;
+    public final static Integer NUMBER_MESSAGE_FOR_TRANSFER = 2;
 
 
     public static void main(String[] args) {
@@ -21,10 +21,11 @@ public class Main {
         log.info("Open URL: " + BASE_URL);
         LoginSteps loginSteps = new LoginSteps();
         loginSteps.login(EMAIL, PASSWORD);
-        loginSteps.workWithMails(NUMBER_MESSEGA_FOR_TRANSFER);
+        loginSteps.workWithMails(NUMBER_MESSAGE_FOR_TRANSFER);
         loginSteps.createNewLabel(NAME_LABEL);
-        /*loginSteps.deleteFolder();*/
-        /*DriverManager.closeDriver();*/
+        loginSteps.checkAndMoveMessage();
+        loginSteps.deleteFolder();
+        DriverManager.closeDriver();
         log.debug("Close driver");
     }
 }

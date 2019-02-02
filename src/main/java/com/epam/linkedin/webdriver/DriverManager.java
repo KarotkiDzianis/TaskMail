@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+
 import java.util.concurrent.TimeUnit;
 
 @Log4j2

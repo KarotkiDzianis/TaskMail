@@ -9,7 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
@@ -22,7 +24,7 @@ public class MailPage extends BasePage {
     @FindBy(xpath = "//input[@class='xx']")
     private WebElement fieldForNameLabel;
 
-    @FindBy(xpath = "//*[@id=':9r']/span[1]")      //*[@role='button' and @id=':9l']
+    @FindBy(xpath = "//*[@id=':9r']/span[1]")
     private WebElement linkYet;
 
     @FindBy(xpath = "//button[@name='ok']")
@@ -43,12 +45,19 @@ public class MailPage extends BasePage {
     @FindBy(xpath = "//*[@jscontroller='ZdOxDb']/td[6]")
     private List<WebElement> listMailsName;
 
+    @FindBy(xpath = "//*[@id=':2q']/div[1]")
+    private WebElement linkMoveTo;
+
+    @FindBy(xpath = "//*[@role='menuitem' and @title='TOP5']")
+    private WebElement chooseFolder;
+
+
     public MailPage() {
         super();
     }
 
     /**
-     * method creates new Label for groupe messages
+     * method creates new Label for group messages
      */
     public void createNewLabel(String name) {
         new WebDriverWait(driver, 10)
@@ -89,7 +98,7 @@ public class MailPage extends BasePage {
                     consonants++;
                 }
             }
-            namesMes.put(i, vowels / consonants);
+            namesMes.put(i + 1, vowels / consonants);
         }
         log.info("Map is created key=number message, value=vowels/consonants");
         for (Entry<Integer, Double> e : namesMes.entrySet()) {
@@ -98,43 +107,47 @@ public class MailPage extends BasePage {
             System.out.print(",");
             System.out.println(e.getValue());
         }
-
         return namesMes;
     }
 
     /**
      * method sorted Map by value
      */
-    public Map filterMapsbyValue(Map map) {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
-        map.entrySet().stream()
-                .sorted(Map.Entry.<Integer, Double>comparingByValue().reversed()).forEach(System.out::println);
-        log.info("map is sorted");
-        Set <Integer> keys = map.keySet();
-        System.out.println("All keys are: " + keys);
-        return map;
-    }
-
-    public Map filterMapsbyValue2(Map map) {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
-      return   map.entrySet().stream()
-                .sorted(Map.Entry.<Integer, Double>comparingByValue().reversed()).collect(Collectors.toMap(Entry::getKey, Map.Entry::getValue);
-
+    public List filterMapsbyValue(Map map) {
+        List list = (List) map.entrySet().stream()
+                .sorted(Entry.<Integer, Double>comparingByValue().reversed()).collect(Collectors.toList());
+        log.info("map is sorted by value and save as list");
+        return list;
     }
 
     /**
-     * method choose necessary checkBox near messages
+     * method choose necessary messages and click checkBox
      */
-    public void checkBox(Map map){
-        HashSet<Integer> setKey = new HashSet<>();
-        Set keys = map.keySet();
-        System.out.println("All keys are: " + keys);
-// To get all key: value
-        for(Object key: keys){
-            System.out.println(key + ": " + map.get(key));
+    public void checkBox(List list, int i) {
+        for (int j = 0; j < i; j++) {
+            String senc = list.get(j).toString();
+            String[] number = senc.split("\\=");
+            new WebDriverWait(driver, 10)
+                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + number[0] + "]/*//*[@role='checkbox']")));
+            WebElement checkBox = driver.findElement(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + number[0] + "]/*//*[@role='checkbox']"));
+            checkBox.click();
+            log.info("Click checkBox near the message number " + number[0]);
         }
-        //WebElement checkBox = driver.findElement(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + i + "]/*//*[@role='checkbox']"));
-        }
+    }
+
+    /**
+     * method transfer message to the folder
+     */
+    public void moveMessage() {
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=':2q']/div[1]")));
+        linkMoveTo.click();
+        log.info("Click link MoveTo");
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@role='menuitem' and @title='TOP5']")));
+        chooseFolder.click();
+        log.info("Transfer message to the folder");
+    }
 
     /**
      * method deletes  Label by Name
@@ -147,6 +160,7 @@ public class MailPage extends BasePage {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-label-name='TOP5']/child::node()")));
         flagTOP5.click();
+        log.info("Drop menu for Folder TOP5 is opened");
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Удалить ярлык']")));
         linkDeleteLabel.click();
