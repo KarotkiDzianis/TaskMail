@@ -28,11 +28,6 @@ public class EnterPasswordPage extends BasePage {
         log.info("From PassPage");
         fieldPassword.sendKeys(pass);
         log.info("Enter password: " + pass);
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@role='button' and @id='passwordNext']")));
         buttonNext.click();

@@ -1,6 +1,7 @@
 package com.epam.linkedin.Main;
 
 import com.epam.linkedin.steps.LoginSteps;
+import com.epam.linkedin.steps.MailSteps;
 import com.epam.linkedin.webdriver.DriverManager;
 import lombok.extern.log4j.Log4j2;
 
@@ -19,12 +20,15 @@ public class Main {
         log.debug("Create driver");
         DriverManager.getDriver().get(BASE_URL);
         log.info("Open URL: " + BASE_URL);
+
         LoginSteps loginSteps = new LoginSteps();
+        MailSteps mailSteps = new MailSteps();
+
         loginSteps.login(EMAIL, PASSWORD);
-        loginSteps.workWithMails(NUMBER_MESSAGE_FOR_TRANSFER);
-        loginSteps.createNewLabel(NAME_LABEL);
-        loginSteps.checkAndMoveMessage();
-        loginSteps.deleteFolder();
+        mailSteps.createNewLabel(NAME_LABEL);
+        mailSteps.workWithMails(NUMBER_MESSAGE_FOR_TRANSFER);
+        mailSteps.checkAndMoveMessage();
+        mailSteps.deleteFolder();
         DriverManager.closeDriver();
         log.debug("Close driver");
     }

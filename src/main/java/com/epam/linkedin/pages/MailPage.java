@@ -24,7 +24,7 @@ public class MailPage extends BasePage {
     @FindBy(xpath = "//input[@class='xx']")
     private WebElement fieldForNameLabel;
 
-    @FindBy(xpath = "//*[@id=':9r']/span[1]")
+    @FindBy(xpath = "//*[@class='CJ']")
     private WebElement linkYet;
 
     @FindBy(xpath = "//button[@name='ok']")
@@ -61,7 +61,7 @@ public class MailPage extends BasePage {
      */
     public void createNewLabel(String name) {
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=':9r']/span[1]")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='CJ']")));
         linkYet.click();
         log.info("Link Yet click");
         new WebDriverWait(driver, 10)
