@@ -103,9 +103,6 @@ public class MailPage extends BasePage {
         log.info("Map is created key=number message, value=vowels/consonants");
         for (Entry<Integer, Double> e : namesMes.entrySet()) {
             namesMes.put(e.getKey(), e.getValue());
-            System.out.print(e.getKey());
-            System.out.print(",");
-            System.out.println(e.getValue());
         }
         return namesMes;
     }
@@ -128,10 +125,10 @@ public class MailPage extends BasePage {
             String senc = list.get(j).toString();
             String[] number = senc.split("\\=");
             new WebDriverWait(driver, 10)
-                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + number[0] + "]/*//*[@role='checkbox']")));
-            WebElement checkBox = driver.findElement(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + number[0] + "]/*//*[@role='checkbox']"));
+                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + number[j] + "]/*//*[@role='checkbox']")));
+            WebElement checkBox = driver.findElement(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + number[j] + "]/*//*[@role='checkbox']"));
             checkBox.click();
-            log.info("Click checkBox near the message number " + number[0]);
+            log.info("Click checkBox near the message number " + number[j]);
         }
     }
 
