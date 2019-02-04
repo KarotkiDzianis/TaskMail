@@ -125,10 +125,10 @@ public class MailPage extends BasePage {
             String senc = list.get(j).toString();
             String[] number = senc.split("\\=");
             new WebDriverWait(driver, 10)
-                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + number[j] + "]/*//*[@role='checkbox']")));
-            WebElement checkBox = driver.findElement(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + number[j] + "]/*//*[@role='checkbox']"));
+                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + number[0] + "]/*//*[@role='checkbox']")));
+            WebElement checkBox = driver.findElement(By.xpath("/*//*[@role='tabpanel']//tbody/tr[" + number[0] + "]/*//*[@role='checkbox']"));
             checkBox.click();
-            log.info("Click checkBox near the message number " + number[j]);
+            log.info("Click checkBox near the message number " + number[0]);
         }
     }
 
